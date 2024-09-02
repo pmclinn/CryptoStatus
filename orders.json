@@ -1,0 +1,32 @@
+[
+    {
+        "OrderId": "c855c84c-4e1b-48a5-9076-d86aad7a8ef6",
+        "ClientOrderId": "98f76fc3-5dd0-47f2-9901-40cd9b112ceb",
+        "CompletionPercentage": 100,
+        "FilledSize": 0.0000337540063871,
+        "FilledValue": 1.9763,
+        "TotalFees": 0.0237,
+        "CreateTime": "2024-09-02 14:31:17.737",
+        "IsClosed": 0
+    },
+    {
+        "OrderId": "037c1157-81db-4ce4-b59a-68fc6ebed520",
+        "ClientOrderId": "1dd46c14-b37b-404f-a0cc-557774640fbf",
+        "CompletionPercentage": 100,
+        "FilledSize": 0.0000337782195525,
+        "FilledValue": 1.9763,
+        "TotalFees": 0.0237,
+        "CreateTime": "2024-09-01 14:29:01.580",
+        "IsClosed": 0
+    },
+    {
+        "OrderId": "004f74e3-aadc-4cb9-8e33-e0c14edcc327",
+        "ClientOrderId": "8e5ed0cd-b0d5-4175-b920-103fa7601f31",
+        "CompletionPercentage": 100,
+        "FilledSize": 0.0000337911162505,
+        "FilledValue": 1.9763,
+        "TotalFees": 0.0237,
+        "CreateTime": "2024-09-01 14:26:46.047",
+        "IsClosed": 0
+    }
+]
