@@ -1,0 +1,169 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f9;
+    background-image: url('BTC.png');
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 95%;
+    max-width: 900px;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 20px;
+    overflow-x: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1 {
+    margin: 0;
+    color: #3a3a3a;
+}
+
+.last-purchase {
+    font-size: 0.9em;
+    color: #555;
+}
+
+h3 {
+    margin-top: 20px;
+    color: #3a3a3a;
+}
+
+#gross-subtotals {
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-left: 5px solid #4caf50;
+}
+
+#gross-subtotals h3 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #2e7d32;
+}
+
+#gross-subtotals p {
+    font-size: 1.3em;
+    color: #333;
+    margin: 10px 0;
+}
+
+#gross-subtotals p strong {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    table-layout: fixed;
+    font-size: 0.9em;
+}
+
+th, td {
+    padding: 6px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    background-color: #fafafa;
+    word-wrap: break-word;
+    white-space: nowrap;
+}
+
+th {
+    background-color: #4caf50;
+    color: white;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+tr td:first-child {
+    text-align: left;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.order {
+    margin-bottom: 10px;
+    background-color: #fefefe;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    word-wrap: break-word;
+}
+
+.order p {
+    margin: 5px 0;
+    color: #555;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+#subtotals p, #gross-subtotals p {
+    font-size: 1.1em;
+    color: #444;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    th, td {
+        padding: 5px;
+        font-size: 0.8em;
+    }
+
+    .order {
+        padding: 10px;
+    }
+
+    #subtotals, #gross-subtotals {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+
+    #subtotals p, #gross-subtotals p {
+        font-size: 1em;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .last-purchase {
+        margin-top: 10px;
+        font-size: 0.8em;
+    }
+}

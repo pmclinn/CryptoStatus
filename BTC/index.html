@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Orders</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>BTC Orders</h1>
+            <div id="last-purchase" class="last-purchase"></div>
+        </div>
+        <br>
+        <div id="gross-subtotals"></div>
+        <div id="monthly-summary"></div>
+        <div id="orders"></div>
+    </div>
+    <script>
+        async function loadOrders() {
+            const response = await fetch('orders.json');
+            const orders = await response.json();
+
+            const ordersContainer = document.getElementById('orders');
+            const grossSubtotalsContainer = document.getElementById('gross-subtotals');
+            const monthlySummaryContainer = document.getElementById('monthly-summary');
+            const lastPurchaseContainer = document.getElementById('last-purchase');
+
+            ordersContainer.innerHTML = '';
+            grossSubtotalsContainer.innerHTML = '';
+            monthlySummaryContainer.innerHTML = '';
+            lastPurchaseContainer.innerHTML = '';
+
+            orders.sort((a, b) => new Date(b.CreateTime) - new Date(a.CreateTime));
+
+            let totalFilledValue = 0;
+            let totalFees = 0;
+            const monthlyTransactions = Array(12).fill(0);
+            const monthlyFilledValue = Array(12).fill(0);
+            const monthlyFees = Array(12).fill(0);
+
+            const mostRecentOrder = orders[0];
+            if (mostRecentOrder) {
+                lastPurchaseContainer.innerHTML = `<strong>Date/Time of Last Purchase:</strong> ${mostRecentOrder.CreateTime}`;
+            }
+
+            orders.forEach(order => {
+                const orderMonth = new Date(order.CreateTime).getMonth();
+                monthlyTransactions[orderMonth]++;
+                monthlyFilledValue[orderMonth] += order.FilledValue;
+                monthlyFees[orderMonth] += order.TotalFees;
+
+                totalFilledValue += order.FilledValue;
+                totalFees += order.TotalFees;
+            });
+
+            // Gross Subtotals
+            grossSubtotalsContainer.innerHTML = `
+                    <h3>Gross</h3>
+                    <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(4)}</p>
+                    <p><strong>Total Fees:</strong> $${totalFees.toFixed(4)}</p>
+               
+                `;
+
+            // Monthly Summary Table
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            let monthlySummaryTable = `
+                    <h3>Gross Monthly Subtotal</h3>
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            ${months.map(month => `<th>${month}</th>`).join('')}
+                        </tr>
+                        <tr>
+                            <td>Txns</td>
+                            ${monthlyTransactions.map(count => `<td>${count}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td>Sub. Value</td>
+                            ${monthlyFilledValue.map(value => `<td>$${value.toFixed(4)}</td>`).join('')}
+                        </tr>
+                        <tr>
+                            <td>Buy Fees</td>
+                            ${monthlyFees.map(fee => `<td>$${fee.toFixed(4)}</td>`).join('')}
+                        </tr>
+                    </table>
+                    <hr>
+                `;
+            monthlySummaryContainer.innerHTML = monthlySummaryTable;
+
+            orders.forEach(order => {
+                const orderElement = document.createElement('div');
+                orderElement.classList.add('order');
+                orderElement.innerHTML = `
+                        <p><strong>Order ID:</strong> ${order.OrderId}</p>
+                        <p><strong>Client Order ID:</strong> ${order.ClientOrderId}</p>
+                        <p><strong>Completion Percentage:</strong> ${order.CompletionPercentage}%</p>
+                        <p><strong>Filled Size:</strong> ${order.FilledSize}</p>
+                        <p><strong>Filled Value:</strong> $${order.FilledValue}</p>
+                        <p><strong>Total Fees:</strong> $${order.TotalFees}</p>
+                        <p><strong>Create Time:</strong> ${order.CreateTime}</p>
+                        <p><strong>Is Closed:</strong> ${order.IsClosed ? 'Yes' : 'No'}</p>
+                        <hr>
+                    `;
+                ordersContainer.appendChild(orderElement);
+            });
+        }
+
+        loadOrders();
+    </script>
+</body>
+</html>
