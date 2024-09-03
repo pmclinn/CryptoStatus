@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f9;
@@ -67,12 +68,13 @@ h3 {
     color: #2e7d32;
 }
 
+/* Table Styles */
 table {
     width: 100%;
+    table-layout: fixed; /* Ensures the table does not collapse */
     border-collapse: collapse;
     margin-top: 10px;
     margin-bottom: 20px;
-    table-layout: fixed;
     font-size: 0.9em;
 }
 
@@ -129,39 +131,30 @@ hr {
 
 /* Mobile view */
 @media (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
     table {
-        display: block;
+        width: 100%;
+        table-layout: fixed; /* Ensures the table does not collapse */
         overflow-x: auto;
     }
 
-    tr {
-        display: flex;
-        flex-direction: column;
-    }
-
     th, td {
-        text-align: left;
-        padding: 10px;
-        border: 1px solid #e0e0e0;
+        padding: 8px;
+        font-size: 0.8em; /* Adjusts font size to fit better on mobile */
     }
 
-    th {
-        background-color: #4caf50;
-        color: white;
-        text-align: center;
-        font-size: 0.85em;
-        flex: 1;
+    h1 {
+        font-size: 1.5em;
     }
 
-    td {
-        flex: 1;
-        font-size: 0.85em;
-        text-align: center;
+    h3 {
+        font-size: 1.2em;
     }
 
-    tr td:first-child {
-        background-color: #f0f4f8;
-        font-weight: bold;
-        text-align: left;
+    #gross-subtotals p {
+        font-size: 1em;
     }
 }
