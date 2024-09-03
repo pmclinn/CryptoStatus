@@ -17,82 +17,86 @@
         <div id="monthly-summary"></div>
         <div id="orders"></div>
     </div>
-    <script>
-        async function loadOrders() {
-            const response = await fetch('orders.json');
-            const orders = await response.json();
+   <script>
+    async function loadOrders() {
+        const response = await fetch('orders.json');
+        const orders = await response.json();
 
-            const ordersContainer = document.getElementById('orders');
-            const grossSubtotalsContainer = document.getElementById('gross-subtotals');
-            const monthlySummaryContainer = document.getElementById('monthly-summary');
-            const lastPurchaseContainer = document.getElementById('last-purchase');
+        const ordersContainer = document.getElementById('orders');
+        const grossSubtotalsContainer = document.getElementById('gross-subtotals');
+        const monthlySummaryContainer = document.getElementById('monthly-summary');
+        const lastPurchaseContainer = document.getElementById('last-purchase');
 
-            ordersContainer.innerHTML = '';
-            grossSubtotalsContainer.innerHTML = '';
-            monthlySummaryContainer.innerHTML = '';
-            lastPurchaseContainer.innerHTML = '';
+        ordersContainer.innerHTML = '';
+        grossSubtotalsContainer.innerHTML = '';
+        monthlySummaryContainer.innerHTML = '';
+        lastPurchaseContainer.innerHTML = '';
 
-            orders.sort((a, b) => new Date(b.CreateTime) - new Date(a.CreateTime));
+        orders.sort((a, b) => new Date(b.CreateTime) - new Date(a.CreateTime));
 
-            let totalFilledValue = 0;
-            let totalFees = 0;
-            const monthlyTransactions = Array(12).fill(0);
-            const monthlyFilledValue = Array(12).fill(0);
-            const monthlyFees = Array(12).fill(0);
+        let totalFilledValue = 0;
+        let totalFees = 0;
+        const monthlyTransactions = Array(12).fill(0);
+        const monthlyFilledValue = Array(12).fill(0);
+        const monthlyFees = Array(12).fill(0);
 
-            const mostRecentOrder = orders[0];
-            if (mostRecentOrder) {
-                lastPurchaseContainer.innerHTML = `<strong>Date/Time of Last Purchase:</strong> ${mostRecentOrder.CreateTime}`;
-            }
-
-            orders.forEach(order => {
-                const orderMonth = new Date(order.CreateTime).getMonth();
-                monthlyTransactions[orderMonth]++;
-                monthlyFilledValue[orderMonth] += order.FilledValue;
-                monthlyFees[orderMonth] += order.TotalFees;
-
-                totalFilledValue += order.FilledValue;
-                totalFees += order.TotalFees;
-            });
-
-            // Gross Subtotals
-            grossSubtotalsContainer.innerHTML = `
-                    <h3>Gross Subtotal</h3>
-                    <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(4)}</p>
-                    <p><strong>Total Fees:</strong> $${totalFees.toFixed(4)}</p>
-                    <hr>
-                `;
-
-            // Monthly Summary Table
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-            let monthlySummaryTable = `
-                    <h3>Gross Monthly Subtotal</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Metric</th>
-                                <th>Txns</th>
-                                <th>Sub</th>
-                                <th>Fees</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${months.map((month, index) => `
-                                <tr>
-                                    <td>${month}</td>
-                                    <td>${monthlyTransactions[index]}</td>
-                                    <td>$${monthlyFilledValue[index].toFixed(4)}</td>
-                                    <td>$${monthlyFees[index].toFixed(4)}</td>
-                                </tr>
-                            `).join('')}
-                        </tbody>
-                    </table>
-                `;
-            monthlySummaryContainer.innerHTML = monthlySummaryTable;
+        const mostRecentOrder = orders[0];
+        if (mostRecentOrder) {
+            lastPurchaseContainer.innerHTML = `<strong>Date/Time of Last Purchase:</strong> ${mostRecentOrder.CreateTime}`;
         }
 
-        loadOrders();
-    </script>
+        orders.forEach(order => {
+            const orderMonth = new Date(order.CreateTime).getMonth();
+            monthlyTransactions[orderMonth]++;
+            monthlyFilledValue[orderMonth] += order.FilledValue;
+            monthlyFees[orderMonth] += order.TotalFees;
+
+            totalFilledValue += order.FilledValue;
+            totalFees += order.TotalFees;
+        });
+
+        // Determine decimal places based on screen width
+        const decimalPlaces = window.innerWidth <= 600 ? 1 : 4;
+
+        // Gross Subtotals
+        grossSubtotalsContainer.innerHTML = `
+            <h3>Gross Subtotal</h3>
+            <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(decimalPlaces)}</p>
+            <p><strong>Total Fees:</strong> $${totalFees.toFixed(decimalPlaces)}</p>
+            <hr>
+        `;
+
+        // Monthly Summary Table
+        const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+        let monthlySummaryTable = `
+            <h3>Gross Monthly Subtotal</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Txns</th>
+                        <th>Sub</th>
+                        <th>Fees</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${months.map((month, index) => `
+                        <tr>
+                            <td>${month}</td>
+                            <td>${monthlyTransactions[index]}</td>
+                            <td>$${monthlyFilledValue[index].toFixed(decimalPlaces)}</td>
+                            <td>$${monthlyFees[index].toFixed(decimalPlaces)}</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        `;
+        monthlySummaryContainer.innerHTML = monthlySummaryTable;
+    }
+
+    loadOrders();
+</script>
+
 </body>
 </html>
