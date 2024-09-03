@@ -11,7 +11,7 @@ body {
 }
 
 .container {
-    width: 95%; /* Resets to 95% to avoid misalignment */
+   /*  width: 95%; Resets to 95% to avoid misalignment */
     max-width: 900px;
     margin: 0 auto; /* Centers the container */
     background-color: rgba(255, 255, 255, 0.9);
