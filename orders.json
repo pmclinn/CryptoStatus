@@ -2,7 +2,7 @@
   {
     "OrderId": "9166a930-e79f-4e26-8900-35c1f5e974d7",
     "ClientOrderId": "99695772-2441-494a-87ab-a7714dae671a",
-    "CompletionPercentage": 99,
+    "CompletionPercentage": 100,
     "FilledSize": 3.3767086E-05,
     "FilledValue": 1.9763,
     "TotalFees": 0.0237,
