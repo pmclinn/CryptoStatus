@@ -1,32 +1,52 @@
 [
-    {
-        "OrderId": "c855c84c-4e1b-48a5-9076-d86aad7a8ef6",
-        "ClientOrderId": "98f76fc3-5dd0-47f2-9901-40cd9b112ceb",
-        "CompletionPercentage": 100,
-        "FilledSize": 0.0000337540063871,
-        "FilledValue": 3.333,
-        "TotalFees": 0.0237,
-        "CreateTime": "2024-09-02 14:31:17.737",
-        "IsClosed": 0
-    },
-    {
-        "OrderId": "037c1157-81db-4ce4-b59a-68fc6ebed520",
-        "ClientOrderId": "1dd46c14-b37b-404f-a0cc-557774640fbf",
-        "CompletionPercentage": 100,
-        "FilledSize": 0.0000337782195525,
-        "FilledValue": 1.9763,
-        "TotalFees": 0.0237,
-        "CreateTime": "2024-09-01 14:29:01.580",
-        "IsClosed": 0
-    },
-    {
-        "OrderId": "004f74e3-aadc-4cb9-8e33-e0c14edcc327",
-        "ClientOrderId": "8e5ed0cd-b0d5-4175-b920-103fa7601f31",
-        "CompletionPercentage": 100,
-        "FilledSize": 0.0000337911162505,
-        "FilledValue": 1.9763,
-        "TotalFees": 0.0237,
-        "CreateTime": "2024-09-01 14:26:46.047",
-        "IsClosed": 0
-    }
+  {
+    "OrderId": "9166a930-e79f-4e26-8900-35c1f5e974d7",
+    "ClientOrderId": "99695772-2441-494a-87ab-a7714dae671a",
+    "CompletionPercentage": 100,
+    "FilledSize": 3.3767086E-05,
+    "FilledValue": 1.9763,
+    "TotalFees": 0.0237,
+    "CreateTime": "09/01/2024 14:18:21",
+    "IsClosed": 0
+  },
+  {
+    "OrderId": "d9eb3bfc-a74e-41b0-9901-70e91b9dd636",
+    "ClientOrderId": "5e62ac01-8245-477c-9167-81f7e2e76fae",
+    "CompletionPercentage": 100,
+    "FilledSize": 3.377505E-05,
+    "FilledValue": 1.9763,
+    "TotalFees": 0.0237,
+    "CreateTime": "09/01/2024 14:24:42",
+    "IsClosed": 0
+  },
+  {
+    "OrderId": "004f74e3-aadc-4cb9-8e33-e0c14edcc327",
+    "ClientOrderId": "8e5ed0cd-b0d5-4175-b920-103fa7601f31",
+    "CompletionPercentage": 100,
+    "FilledSize": 3.3791115E-05,
+    "FilledValue": 1.9763,
+    "TotalFees": 0.0237,
+    "CreateTime": "09/01/2024 14:26:46",
+    "IsClosed": 0
+  },
+  {
+    "OrderId": "037c1157-81db-4ce4-b59a-68fc6ebed520",
+    "ClientOrderId": "1dd46c14-b37b-404f-a0cc-557774640fbf",
+    "CompletionPercentage": 100,
+    "FilledSize": 3.377822E-05,
+    "FilledValue": 1.9763,
+    "TotalFees": 0.0237,
+    "CreateTime": "09/01/2024 14:29:01",
+    "IsClosed": 0
+  },
+  {
+    "OrderId": "c855c84c-4e1b-48a5-9076-d86aad7a8ef6",
+    "ClientOrderId": "98f76fc3-5dd0-47f2-9901-40cd9b112ceb",
+    "CompletionPercentage": 100,
+    "FilledSize": 3.3754008E-05,
+    "FilledValue": 1.9763,
+    "TotalFees": 0.0237,
+    "CreateTime": "09/02/2024 14:31:17",
+    "IsClosed": 0
+  }
 ]
