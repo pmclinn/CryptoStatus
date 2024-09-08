@@ -138,5 +138,15 @@
     "TotalFees": 0.0427,
     "CreateTime": "09/08/2024 02:43:00",
     "IsClosed": 0
+  },
+  {
+    "OrderId": "cee59720-3c9b-46e3-9b6d-17558c7ccef1",
+    "ClientOrderId": "0c0f7039-7ca4-4c26-9432-5525bc67637d",
+    "CompletionPercentage": 100,
+    "FilledSize": 6.564965E-05,
+    "FilledValue": 3.5573,
+    "TotalFees": 0.0427,
+    "CreateTime": "09/08/2024 08:53:04",
+    "IsClosed": 0
   }
 ]
