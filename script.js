@@ -32,7 +32,7 @@ async function loadOrders() {
         });
 
         // Sort orders by Id in ascending order
-        orders.sort((a, b) => a.Id - b.Id);
+        orders.sort((a, b) => b.Id - a.Id);
 
         // Calculate top-level summaries
         let totalGrossProfit = 0;
