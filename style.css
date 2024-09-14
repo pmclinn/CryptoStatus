@@ -2,19 +2,16 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f9;
-    background-image: url('BTC.png');
-    background-size: cover;
-    margin: 0; /* Removes any margin from the body */
+    margin: 0;
     padding: 0;
     color: #333;
-    overflow-x: hidden; /* Prevents horizontal scrolling on mobile */
+    overflow-x: hidden;
 }
 
 .container {
-   /*  width: 95%; Resets to 95% to avoid misalignment */
     max-width: 900px;
-    margin: 0 auto; /* Centers the container */
-    background-color: rgba(255, 255, 255, 0.9);
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
@@ -24,21 +21,21 @@ body {
 
 .header {
     display: flex;
-    flex-direction: column; /* Stacks items vertically */
-    align-items: center; /* Centers the content */
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
     margin: 0;
     color: #3a3a3a;
-    text-align: center; /* Center the text */
+    text-align: center;
 }
 
 .last-purchase {
     font-size: 0.9em;
     color: #555;
-    text-align: center; /* Center the text */
-    margin-top: 5px; /* Add some spacing between the header and the date */
+    text-align: center;
+    margin-top: 5px;
 }
 
 h3 {
@@ -46,29 +43,27 @@ h3 {
     color: #3a3a3a;
 }
 
-#gross-subtotals {
+#summary-totals, #gross-subtotals, #monthly-summary {
     background-color: #f0f4f8;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
-    border-left: 5px solid #4caf50;
-    box-sizing: border-box; /* Includes padding in the element's total width */
+    box-sizing: border-box;
 }
 
-#gross-subtotals h3 {
+#summary-totals h3, #gross-subtotals h3, #monthly-summary h3 {
     margin-top: 0;
     font-size: 1.2em;
     color: #2e7d32;
 }
 
-#gross-subtotals p {
-    font-size: 1.3em;
-    color: #333;
+#summary-totals p, #gross-subtotals p {
+    font-size: 1.1em;
+    color: #444;
     margin: 10px 0;
 }
 
-#gross-subtotals p strong {
+#summary-totals p strong, #gross-subtotals p strong {
     font-weight: bold;
     color: #2e7d32;
 }
@@ -76,7 +71,7 @@ h3 {
 /* Table Styles */
 table {
     width: 100%;
-    table-layout: fixed; /* Ensures the table does not collapse */
+    table-layout: fixed;
     border-collapse: collapse;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -114,9 +109,10 @@ tr td:first-child {
     background-color: #fefefe;
     padding: 15px;
     border-radius: 5px;
+    border-left: 5px solid #4caf50;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     word-wrap: break-word;
-    font-size: 0.85em; /* Reduce font size for better fit */
+    font-size: 0.85em;
 }
 
 .order p {
@@ -124,15 +120,14 @@ tr td:first-child {
     color: #555;
 }
 
+.order p strong {
+    color: #2e7d32;
+}
+
 hr {
     border: 0;
     height: 1px;
     background-color: #e0e0e0;
-}
-
-#subtotals p, #gross-subtotals p {
-    font-size: 1.1em;
-    color: #444;
 }
 
 /* Mobile view */
@@ -143,20 +138,20 @@ hr {
     }
 
     .last-purchase {
-        margin-top: 5px; /* Adds spacing between the header and the date */
+        margin-top: 5px;
         word-wrap: break-word;
-        width: 100%; /* Ensures the date spans the entire width and wraps to the next line */
+        width: 100%;
     }
 
     table {
         width: 100%;
-        table-layout: fixed; /* Ensures the table does not collapse */
+        table-layout: fixed;
         overflow-x: auto;
     }
 
     th, td {
         padding: 8px;
-        font-size: 0.8em; /* Adjusts font size to fit better on mobile */
+        font-size: 0.8em;
     }
 
     h1 {
@@ -167,11 +162,11 @@ hr {
         font-size: 1.2em;
     }
 
-    #gross-subtotals p {
+    #summary-totals p, #gross-subtotals p {
         font-size: 1em;
     }
 
     .order {
-        font-size: 0.8em; /* Further reduce font size for mobile */
+        font-size: 0.8em;
     }
 }

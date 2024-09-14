@@ -13,109 +13,11 @@
             <div id="last-purchase" class="last-purchase"></div>
         </div>
         <br>
+        <div id="summary-totals"></div>
         <div id="gross-subtotals"></div>
         <div id="monthly-summary"></div>
         <div id="orders"></div>
     </div>
-    <script>
-        async function loadOrders() {
-            const response = await fetch('orders.json');
-            const orders = await response.json();
-
-            const ordersContainer = document.getElementById('orders');
-            const grossSubtotalsContainer = document.getElementById('gross-subtotals');
-            const monthlySummaryContainer = document.getElementById('monthly-summary');
-            const lastPurchaseContainer = document.getElementById('last-purchase');
-
-            ordersContainer.innerHTML = '';
-            grossSubtotalsContainer.innerHTML = '';
-            monthlySummaryContainer.innerHTML = '';
-            lastPurchaseContainer.innerHTML = '';
-
-            orders.sort((a, b) => new Date(b.CreateTime) - new Date(a.CreateTime));
-
-            let totalFilledValue = 0;
-            let totalFees = 0;
-            const monthlyTransactions = Array(12).fill(0);
-            const monthlyFilledValue = Array(12).fill(0);
-            const monthlyFees = Array(12).fill(0);
-
-            const mostRecentOrder = orders[0];
-            if (mostRecentOrder) {
-                lastPurchaseContainer.innerHTML = `<strong>Date/Time of Last Purchase:</strong> ${mostRecentOrder.CreateTime}`;
-            }
-
-            orders.forEach(order => {
-                const orderMonth = new Date(order.CreateTime).getMonth();
-                monthlyTransactions[orderMonth]++;
-                monthlyFilledValue[orderMonth] += order.FilledValue;
-                monthlyFees[orderMonth] += order.TotalFees;
-
-                totalFilledValue += order.FilledValue;
-                totalFees += order.TotalFees;
-            });
-
-            // Determine decimal places based on screen width
-            const isMobile = window.innerWidth <= 600;
-            const decimalPlaces = isMobile ? 1 : 4;
-
-            // Gross Subtotals
-            grossSubtotalsContainer.innerHTML = `
-                <h3>Gross Subtotal</h3>
-                <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(decimalPlaces)}</p>
-                <p><strong>Total Fees:</strong> $${totalFees.toFixed(decimalPlaces)}</p>
-                <hr>
-            `;
-
-            // Monthly Summary Table
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
-            let monthlySummaryTable = `
-                <h3>Gross Monthly Subtotal</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Metric</th>
-                            <th>Txns</th>
-                            <th>Sub</th>
-                            <th>Fees</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${months.map((month, index) => `
-                            <tr>
-                                <td>${month}</td>
-                                <td>${monthlyTransactions[index]}</td>
-                                <td>$${monthlyFilledValue[index].toFixed(decimalPlaces)}</td>
-                                <td>$${monthlyFees[index].toFixed(decimalPlaces)}</td>
-                            </tr>
-                        `).join('')}
-                    </tbody>
-                </table>
-            `;
-            monthlySummaryContainer.innerHTML = monthlySummaryTable;
-
-            // Transactions Details
-            orders.forEach(order => {
-                const orderElement = document.createElement('div');
-                orderElement.classList.add('order');
-                orderElement.innerHTML = `
-                    <p><strong>Order ID:</strong> ${order.OrderId}</p>
-                    <p><strong>Client Order ID:</strong> ${order.ClientOrderId}</p>
-                    <p><strong>Completion Percentage:</strong> ${order.CompletionPercentage}%</p>
-                    <p><strong>Filled Size:</strong> ${order.FilledSize}</p>
-                    <p><strong>Filled Value:</strong> $${order.FilledValue.toFixed(decimalPlaces)}</p>
-                    <p><strong>Total Fees:</strong> $${order.TotalFees.toFixed(decimalPlaces)}</p>
-                    <p><strong>Create Time:</strong> ${order.CreateTime}</p>
-                    <p><strong>Is Closed:</strong> ${order.IsClosed ? 'Yes' : 'No'}</p>
-                  
-                `;
-                ordersContainer.appendChild(orderElement);
-            });
-        }
-
-        window.addEventListener('resize', loadOrders); // Re-run the function if the window is resized
-        loadOrders(); // Initial load
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
