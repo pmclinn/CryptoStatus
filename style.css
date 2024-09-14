@@ -43,7 +43,35 @@ h3 {
     color: #3a3a3a;
 }
 
-#summary-totals, #gross-subtotals, #monthly-summary {
+/* Summary Totals Section */
+#summary-totals {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #66bb6a;
+    box-sizing: border-box;
+}
+
+#summary-totals h3 {
+    margin-top: 0;
+    font-size: 1.4em;
+    color: #2e7d32;
+}
+
+#summary-totals p {
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0;
+}
+
+#summary-totals p strong {
+    font-weight: bold;
+    color: #2e7d32;
+}
+
+/* Profit Summary Section */
+#profit-summary {
     background-color: #f0f4f8;
     padding: 20px;
     border-radius: 8px;
@@ -51,34 +79,45 @@ h3 {
     box-sizing: border-box;
 }
 
-#summary-totals h3, #gross-subtotals h3, #monthly-summary h3 {
+#profit-summary h3 {
     margin-top: 0;
-    font-size: 1.2em;
-    color: #2e7d32;
+    font-size: 1.4em;
+    color: #1565c0;
 }
 
-#summary-totals p, #gross-subtotals p {
+#profit-summary p {
     font-size: 1.1em;
     color: #444;
     margin: 10px 0;
 }
 
-#summary-totals p strong, #gross-subtotals p strong {
+#profit-summary p strong {
     font-weight: bold;
-    color: #2e7d32;
+    color: #1565c0;
 }
 
-/* Table Styles */
-table {
+/* Monthly Summary Section */
+#monthly-summary {
+    background-color: #fff3e0;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+#monthly-summary h3 {
+    margin-top: 0;
+    font-size: 1.4em;
+    color: #ef6c00;
+}
+
+#monthly-summary table {
     width: 100%;
-    table-layout: fixed;
     border-collapse: collapse;
     margin-top: 10px;
-    margin-bottom: 20px;
-    font-size: 0.9em;
 }
 
-th, td {
+#monthly-summary th, #monthly-summary td {
     padding: 10px;
     text-align: center;
     border: 1px solid #e0e0e0;
@@ -87,23 +126,24 @@ th, td {
     white-space: nowrap;
 }
 
-th {
-    background-color: #4caf50;
+#monthly-summary th {
+    background-color: #ef6c00;
     color: white;
     font-weight: bold;
     font-size: 0.95em;
 }
 
-tr:nth-child(even) td {
+#monthly-summary tr:nth-child(even) td {
     background-color: #f9f9f9;
 }
 
-tr td:first-child {
+#monthly-summary tr td:first-child {
     text-align: left;
     font-weight: bold;
     font-size: 0.95em;
 }
 
+/* Order Details Section */
 .order {
     margin-bottom: 10px;
     background-color: #fefefe;
@@ -130,7 +170,7 @@ hr {
     background-color: #e0e0e0;
 }
 
-/* Mobile view */
+/* Mobile View */
 @media (max-width: 600px) {
     .header {
         align-items: center;
@@ -162,7 +202,7 @@ hr {
         font-size: 1.2em;
     }
 
-    #summary-totals p, #gross-subtotals p {
+    #summary-totals p, #profit-summary p {
         font-size: 1em;
     }
 

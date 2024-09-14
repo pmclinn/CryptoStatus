@@ -3,13 +3,13 @@ async function loadOrders() {
     const orders = await response.json();
 
     const ordersContainer = document.getElementById('orders');
-    const grossSubtotalsContainer = document.getElementById('gross-subtotals');
+    const profitSummaryContainer = document.getElementById('profit-summary');
     const monthlySummaryContainer = document.getElementById('monthly-summary');
     const lastPurchaseContainer = document.getElementById('last-purchase');
     const summaryTotalsContainer = document.getElementById('summary-totals');
 
     ordersContainer.innerHTML = '';
-    grossSubtotalsContainer.innerHTML = '';
+    profitSummaryContainer.innerHTML = '';
     monthlySummaryContainer.innerHTML = '';
     lastPurchaseContainer.innerHTML = '';
     summaryTotalsContainer.innerHTML = '';
@@ -25,7 +25,7 @@ async function loadOrders() {
     const weeklyProfits = {};
     const weeklyTransactions = {};
 
-    // Initialize variables for gross subtotals and monthly summaries
+    // Initialize variables for monthly summaries
     const monthlyTransactions = Array(12).fill(0);
     const monthlyFilledValue = Array(12).fill(0);
     const monthlyGrossProfit = Array(12).fill(0);
@@ -61,6 +61,12 @@ async function loadOrders() {
     const averageProfitPerWeek = numberOfWeeks > 0 ? totalGrossProfit / numberOfWeeks : 0;
     const averageTransactionsPerWeek = numberOfWeeks > 0 ? totalTransactions / numberOfWeeks : 0;
 
+    // Calculate Gross Profit Percentage
+    let grossProfitPercentage = 0;
+    if (totalFilledValue > 0) {
+        grossProfitPercentage = (totalGrossProfit / totalFilledValue) * 100;
+    }
+
     // Display top-level summaries
     summaryTotalsContainer.innerHTML = `
         <h3>Summary Totals</h3>
@@ -76,11 +82,12 @@ async function loadOrders() {
     const isMobile = window.innerWidth <= 600;
     const decimalPlaces = isMobile ? 1 : 4;
 
-    // Gross Subtotals
-    grossSubtotalsContainer.innerHTML = `
-        <h3>Gross Subtotals</h3>
+    // Profit Summary
+    profitSummaryContainer.innerHTML = `
+        <h3>Profit Summary</h3>
         <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(decimalPlaces)}</p>
         <p><strong>Total Gross Profit:</strong> $${totalGrossProfit.toFixed(decimalPlaces)}</p>
+        <p><strong>Gross Profit Percentage:</strong> ${grossProfitPercentage.toFixed(2)}%</p>
         <hr>
     `;
 
@@ -112,7 +119,7 @@ async function loadOrders() {
     `;
     monthlySummaryContainer.innerHTML = monthlySummaryTable;
 
-    // Transactions Details
+    // Transactions Details (no change)
     orders.forEach(order => {
         const orderElement = document.createElement('div');
         orderElement.classList.add('order');
@@ -138,14 +145,3 @@ async function loadOrders() {
         lastPurchaseContainer.innerHTML = `<strong>Date of Last Purchase:</strong> ${lastPurchaseDate}`;
     }
 }
-
-// Helper function to get week number of the year
-function getWeekNumber(d) {
-    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-    const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
-    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1)/7);
-    return `${d.getUTCFullYear()}-W${weekNo}`;
-}
-
-window.addEventListener('resize', loadOrders); // Re-run the function if the window is resized
-loadOrders(); // Initial load
