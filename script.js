@@ -119,7 +119,7 @@ async function loadOrders() {
     `;
     monthlySummaryContainer.innerHTML = monthlySummaryTable;
 
-    // Transactions Details (no change)
+    // Transactions Details
     orders.forEach(order => {
         const orderElement = document.createElement('div');
         orderElement.classList.add('order');
@@ -145,3 +145,14 @@ async function loadOrders() {
         lastPurchaseContainer.innerHTML = `<strong>Date of Last Purchase:</strong> ${lastPurchaseDate}`;
     }
 }
+
+// Helper function to get week number of the year
+function getWeekNumber(d) {
+    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1)/7);
+    return `${d.getUTCFullYear()}-W${weekNo}`;
+}
+
+window.addEventListener('resize', loadOrders); // Re-run the function if the window is resized
+loadOrders(); // Initial load
