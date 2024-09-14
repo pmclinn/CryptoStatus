@@ -9,13 +9,13 @@ async function loadOrders() {
         const profitSummaryContainer = document.getElementById('profit-summary');
         const monthlySummaryContainer = document.getElementById('monthly-summary');
         const lastPurchaseContainer = document.getElementById('last-purchase');
-        const summaryTotalsContainer = document.getElementById('summary-totals');
+        const activitySummaryContainer = document.getElementById('activity-summary');
 
         ordersContainer.innerHTML = '';
         profitSummaryContainer.innerHTML = '';
         monthlySummaryContainer.innerHTML = '';
         lastPurchaseContainer.innerHTML = '';
-        summaryTotalsContainer.innerHTML = '';
+        activitySummaryContainer.innerHTML = '';
 
         // Ensure IDs are integers and parse dates and numbers
         orders.forEach(order => {
@@ -96,27 +96,24 @@ async function loadOrders() {
             grossProfitPercentage = (totalGrossProfit / totalFilledValue) * 100;
         }
 
-        // Display top-level summaries
-        summaryTotalsContainer.innerHTML = `
-            <h3>Summary Totals</h3>
-            <p><strong>Total Gross Profit:</strong> $${totalGrossProfit.toFixed(2)}</p>
-            <p><strong>Average Profit Per Week:</strong> $${averageProfitPerWeek.toFixed(2)}</p>
-            <p><strong>Average Transactions Per Week:</strong> ${averageTransactionsPerWeek.toFixed(2)}</p>
-            <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(2)}</p>
-            <p><strong>Open Orders Value:</strong> $${openOrdersValue.toFixed(2)}</p>
-            <hr>
-        `;
-
-        // Determine decimal places based on screen width
+        // Display Profit Summary at the top
         const isMobile = window.innerWidth <= 600;
         const decimalPlaces = isMobile ? 1 : 4;
 
-        // Profit Summary
         profitSummaryContainer.innerHTML = `
             <h3>Profit Summary</h3>
             <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(decimalPlaces)}</p>
             <p><strong>Total Gross Profit:</strong> $${totalGrossProfit.toFixed(decimalPlaces)}</p>
             <p><strong>Gross Profit Percentage:</strong> ${grossProfitPercentage.toFixed(2)}%</p>
+            <hr>
+        `;
+
+        // Display Activity Summary (renamed from Summary Totals)
+        activitySummaryContainer.innerHTML = `
+            <h3>Activity Summary</h3>
+            <p><strong>Average Profit Per Week:</strong> $${averageProfitPerWeek.toFixed(2)}</p>
+            <p><strong>Average Transactions Per Week:</strong> ${averageTransactionsPerWeek.toFixed(2)}</p>
+            <p><strong>Open Orders Value:</strong> $${openOrdersValue.toFixed(2)}</p>
             <hr>
         `;
 

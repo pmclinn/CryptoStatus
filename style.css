@@ -43,33 +43,6 @@ h3 {
     color: #3a3a3a;
 }
 
-/* Summary Totals Section */
-#summary-totals {
-    background-color: #e8f5e9;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    border-left: 5px solid #66bb6a;
-    box-sizing: border-box;
-}
-
-#summary-totals h3 {
-    margin-top: 0;
-    font-size: 1.4em;
-    color: #2e7d32;
-}
-
-#summary-totals p {
-    font-size: 1.2em;
-    color: #333;
-    margin: 10px 0;
-}
-
-#summary-totals p strong {
-    font-weight: bold;
-    color: #2e7d32;
-}
-
 /* Profit Summary Section */
 #profit-summary {
     background-color: #f0f4f8;
@@ -94,6 +67,33 @@ h3 {
 #profit-summary p strong {
     font-weight: bold;
     color: #1565c0;
+}
+
+/* Activity Summary Section */
+#activity-summary {
+    background-color: #e8f5e9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 5px solid #66bb6a;
+    box-sizing: border-box;
+}
+
+#activity-summary h3 {
+    margin-top: 0;
+    font-size: 1.4em;
+    color: #2e7d32;
+}
+
+#activity-summary p {
+    font-size: 1.2em;
+    color: #333;
+    margin: 10px 0;
+}
+
+#activity-summary p strong {
+    font-weight: bold;
+    color: #2e7d32;
 }
 
 /* Monthly Summary Section */
@@ -202,7 +202,7 @@ hr {
         font-size: 1.2em;
     }
 
-    #summary-totals p, #profit-summary p {
+    #profit-summary p, #activity-summary p {
         font-size: 1em;
     }
 
