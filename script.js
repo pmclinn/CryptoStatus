@@ -17,7 +17,7 @@ async function loadOrders() {
         lastPurchaseContainer.innerHTML = '';
         summaryTotalsContainer.innerHTML = '';
 
-        // Ensure IDs are integers and BuyDate is a Date object
+        // Ensure IDs are integers and parse dates and numbers
         orders.forEach(order => {
             order.Id = parseInt(order.Id, 10);
             order.BuyDate = new Date(order.BuyDate);
@@ -31,8 +31,19 @@ async function loadOrders() {
             order.TargetedProfitPerc = parseFloat(order.TargetedProfitPerc);
         });
 
-        // Sort orders by Id in ascending order
+        // Sort orders by Id in descending order
         orders.sort((a, b) => b.Id - a.Id);
+
+        // Find the order with the most recent BuyDate
+        let mostRecentOrder = orders.reduce((latestOrder, currentOrder) => {
+            return currentOrder.BuyDate > latestOrder.BuyDate ? currentOrder : latestOrder;
+        }, orders[0]);
+
+        // Update the last purchase date
+        if (orders.length > 0) {
+            const lastPurchaseDate = formatDate(mostRecentOrder.BuyDate);
+            lastPurchaseContainer.innerHTML = `<strong>Date of Last Purchase:</strong> ${lastPurchaseDate}`;
+        }
 
         // Calculate top-level summaries
         let totalGrossProfit = 0;
@@ -156,12 +167,6 @@ async function loadOrders() {
             `;
             ordersContainer.appendChild(orderElement);
         });
-
-        // Update the last purchase date
-        if (orders.length > 0) {
-            const lastPurchaseDate = formatDate(orders[orders.length - 1].BuyDate);
-            lastPurchaseContainer.innerHTML = `<strong>Date of Last Purchase:</strong> ${lastPurchaseDate}`;
-        }
     } catch (error) {
         console.error('An error occurred while loading orders:', error);
     }
