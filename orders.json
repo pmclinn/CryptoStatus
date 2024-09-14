@@ -216,18 +216,6 @@
     "GrossProfit": 0.0645
   },
   {
-    "Id": 5,
-    "BuyDate": "2024-09-04T00:00:00",
-    "SaleDate": null,
-    "FilledValue": 2.3024,
-    "DaysBetweenCreateAndSale": null,
-    "PurchasePrice": 57885.1300,
-    "ActualSalePrice": null,
-    "TargetedProfitPerc": 4.9900,
-    "ProfitFlag": "",
-    "GrossProfit": null
-  },
-  {
     "Id": 4,
     "BuyDate": "2024-09-04T00:00:00",
     "SaleDate": "2024-09-13T00:00:00",
