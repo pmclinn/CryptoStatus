@@ -1,5 +1,3 @@
-// script.js
-
 async function loadOrders() {
     try {
         const response = await fetch('orders.json');
@@ -59,7 +57,14 @@ async function loadOrders() {
         const monthlyFilledValue = Array(12).fill(0);
         const monthlyProfitMinusFees = Array(12).fill(0);
 
-        orders.forEach(order => {
+        // Filter orders to only include closed sales
+        const closedSales = orders.filter(order => order.SaleDate !== null);
+
+        // Calculate Net Profit (Profit Minus Fees) for closed sales
+        let totalNetProfitMinusFees = 0;
+        let totalFilledValueClosedSales = 0;
+
+        closedSales.forEach(order => {
             const buyDate = order.BuyDate;
             const orderMonth = buyDate.getMonth();
             const weekNumber = getWeekNumber(buyDate);
@@ -76,8 +81,9 @@ async function loadOrders() {
 
             if (order.ProfitMinusFees !== null) {
                 totalProfitMinusFees += order.ProfitMinusFees;
+                totalNetProfitMinusFees += order.ProfitMinusFees;
 
-                // Update monthly gross profit
+                // Update monthly net profit
                 monthlyProfitMinusFees[orderMonth] += order.ProfitMinusFees;
 
                 weeklyProfits[weekNumber] = (weeklyProfits[weekNumber] || 0) + order.ProfitMinusFees;
@@ -87,24 +93,24 @@ async function loadOrders() {
         });
 
         const numberOfWeeks = Object.keys(weeklyProfits).length;
-        const averageProfitPerWeek = numberOfWeeks > 0 ? totalProfitMinusFees / numberOfWeeks : 0;
+        const averageProfitPerWeek = numberOfWeeks > 0 ? totalNetProfitMinusFees / numberOfWeeks : 0;
         const averageTransactionsPerWeek = numberOfWeeks > 0 ? totalTransactions / numberOfWeeks : 0;
 
-        // Calculate Gross Profit Percentage
-        let ProfitMinusFeesPercentage = 0;
-        if (totalFilledValue > 0) {
-            ProfitMinusFeesPercentage = (totalProfitMinusFees / totalFilledValue) * 100;
+        // Calculate Net Profit Percentage for closed sales
+        let NetProfitPercentage = 0;
+        if (totalFilledValueClosedSales > 0) {
+            NetProfitPercentage = (totalNetProfitMinusFees / totalFilledValueClosedSales) * 100;
         }
 
-        // Display Profit Summary at the top
+        // Display Profit Summary at the top (changed to Net Profit)
         const isMobile = window.innerWidth <= 600;
         const decimalPlaces = isMobile ? 1 : 4;
 
         profitSummaryContainer.innerHTML = `
             <h3>Profit Summary</h3>
-            <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(decimalPlaces)}</p>
-            <p><strong>Total Gross Profit:</strong> $${totalProfitMinusFees.toFixed(decimalPlaces)}</p>
-            <p><strong>Gross Profit Percentage:</strong> ${ProfitMinusFeesPercentage.toFixed(2)}%</p>
+            <p><strong>Total Filled Value (Closed Sales):</strong> $${totalFilledValueClosedSales.toFixed(decimalPlaces)}</p>
+            <p><strong>Total Net Profit:</strong> $${totalNetProfitMinusFees.toFixed(decimalPlaces)}</p>
+            <p><strong>Net Profit Percentage:</strong> ${NetProfitPercentage.toFixed(2)}%</p>
             <hr>
         `;
 
@@ -128,7 +134,7 @@ async function loadOrders() {
                         <th>Month</th>
                         <th>Txns</th>
                         <th>Filled Value</th>
-                        <th>Gross Profit</th>
+                        <th>Net Profit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,7 +166,7 @@ async function loadOrders() {
                 <p><strong>Actual Sale Price:</strong> ${order.ActualSalePrice !== null ? `$${order.ActualSalePrice.toFixed(decimalPlaces)}` : 'N/A'}</p>
                 <p><strong>Targeted Profit (%):</strong> ${order.TargetedProfitPerc !== null ? `${order.TargetedProfitPerc.toFixed(2)}%` : 'N/A'}</p>
                 <p><strong>Profit Flag:</strong> ${order.ProfitFlag}</p>
-                <p><strong>Gross Profit:</strong> ${order.ProfitMinusFees !== null ? `$${order.ProfitMinusFees.toFixed(decimalPlaces)}` : 'N/A'}</p>
+                <p><strong>Net Profit:</strong> ${order.ProfitMinusFees !== null ? `$${order.ProfitMinusFees.toFixed(decimalPlaces)}` : 'N/A'}</p>
             `;
             ordersContainer.appendChild(orderElement);
         });
