@@ -9,7 +9,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 2.3900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 29,
@@ -21,7 +21,7 @@
     "ActualSalePrice": 58365.9700,
     "TargetedProfitPerc": 0.9900,
     "ProfitFlag": "Lost Money",
-    "GrossProfit": -0.0563
+    "ProfitMinusFees": -0.4120
   },
   {
     "Id": 28,
@@ -33,7 +33,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 3.3900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 27,
@@ -45,7 +45,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 3.3900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 26,
@@ -57,7 +57,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 25,
@@ -69,7 +69,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 24,
@@ -81,7 +81,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 23,
@@ -93,7 +93,7 @@
     "ActualSalePrice": null,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "",
-    "GrossProfit": null
+    "ProfitMinusFees": null
   },
   {
     "Id": 22,
@@ -105,7 +105,7 @@
     "ActualSalePrice": 59518.1200,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.3774
+    "ProfitMinusFees": 0.2825
   },
   {
     "Id": 21,
@@ -117,7 +117,7 @@
     "ActualSalePrice": 59645.3400,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.3951
+    "ProfitMinusFees": 0.3002
   },
   {
     "Id": 20,
@@ -129,7 +129,7 @@
     "ActualSalePrice": 59735.1100,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.4076
+    "ProfitMinusFees": 0.3127
   },
   {
     "Id": 19,
@@ -141,7 +141,7 @@
     "ActualSalePrice": 59222.8700,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.3364
+    "ProfitMinusFees": 0.2415
   },
   {
     "Id": 18,
@@ -153,7 +153,7 @@
     "ActualSalePrice": 59858.0300,
     "TargetedProfitPerc": 2.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.4247
+    "ProfitMinusFees": 0.3298
   },
   {
     "Id": 17,
@@ -165,7 +165,7 @@
     "ActualSalePrice": 58576.0300,
     "TargetedProfitPerc": 3.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.2463
+    "ProfitMinusFees": 0.1514
   },
   {
     "Id": 16,
@@ -177,7 +177,7 @@
     "ActualSalePrice": 58709.5400,
     "TargetedProfitPerc": 3.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.2649
+    "ProfitMinusFees": 0.1700
   },
   {
     "Id": 15,
@@ -189,7 +189,7 @@
     "ActualSalePrice": 58683.7700,
     "TargetedProfitPerc": 8.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.5259
+    "ProfitMinusFees": 0.4832
   },
   {
     "Id": 14,
@@ -201,7 +201,7 @@
     "ActualSalePrice": 58819.2400,
     "TargetedProfitPerc": 8.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.5353
+    "ProfitMinusFees": 0.4926
   },
   {
     "Id": 13,
@@ -213,7 +213,7 @@
     "ActualSalePrice": 55440.0800,
     "TargetedProfitPerc": 2.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.2850
+    "ProfitMinusFees": 0.2554
   },
   {
     "Id": 12,
@@ -225,7 +225,7 @@
     "ActualSalePrice": 55003.6500,
     "TargetedProfitPerc": 2.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.2633
+    "ProfitMinusFees": 0.2337
   },
   {
     "Id": 11,
@@ -237,7 +237,7 @@
     "ActualSalePrice": 54974.0100,
     "TargetedProfitPerc": 2.2900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.2618
+    "ProfitMinusFees": 0.2322
   },
   {
     "Id": 10,
@@ -249,7 +249,7 @@
     "ActualSalePrice": 57400.9300,
     "TargetedProfitPerc": 2.2900,
     "ProfitFlag": "Lost Money",
-    "GrossProfit": -0.1881
+    "ProfitMinusFees": -0.2177
   },
   {
     "Id": 9,
@@ -261,7 +261,7 @@
     "ActualSalePrice": 57594.8200,
     "TargetedProfitPerc": 2.2900,
     "ProfitFlag": "Lost Money",
-    "GrossProfit": -0.1804
+    "ProfitMinusFees": -0.2100
   },
   {
     "Id": 8,
@@ -273,7 +273,7 @@
     "ActualSalePrice": 58795.0400,
     "TargetedProfitPerc": 4.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.0353
+    "ProfitMinusFees": 0.0077
   },
   {
     "Id": 7,
@@ -285,7 +285,7 @@
     "ActualSalePrice": 59030.8700,
     "TargetedProfitPerc": 4.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.0447
+    "ProfitMinusFees": 0.0171
   },
   {
     "Id": 6,
@@ -297,7 +297,7 @@
     "ActualSalePrice": 59529.2800,
     "TargetedProfitPerc": 4.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.0645
+    "ProfitMinusFees": 0.0369
   },
   {
     "Id": 4,
@@ -309,7 +309,7 @@
     "ActualSalePrice": 59418.9000,
     "TargetedProfitPerc": 4.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.0601
+    "ProfitMinusFees": 0.0325
   },
   {
     "Id": 3,
@@ -321,6 +321,6 @@
     "ActualSalePrice": 59497.1800,
     "TargetedProfitPerc": 4.9900,
     "ProfitFlag": "Made Money",
-    "GrossProfit": 0.0632
+    "ProfitMinusFees": 0.0356
   }
 ]
