@@ -69,15 +69,11 @@ async function loadOrders() {
             const orderMonth = buyDate.getMonth();
             const weekNumber = getWeekNumber(buyDate);
 
-            // Update monthly transactions and filled values
+            // Update monthly transactions and filled values for closed sales
             monthlyTransactions[orderMonth]++;
             monthlyFilledValue[orderMonth] += order.FilledValue;
 
-            totalFilledValue += order.FilledValue;
-
-            if (!order.SaleDate) {
-                openOrdersValue += order.FilledValue;
-            }
+            totalFilledValueClosedSales += order.FilledValue; // Accumulate filled value for closed sales
 
             if (order.ProfitMinusFees !== null) {
                 totalProfitMinusFees += order.ProfitMinusFees;
@@ -90,6 +86,13 @@ async function loadOrders() {
             }
 
             weeklyTransactions[weekNumber] = (weeklyTransactions[weekNumber] || 0) + 1;
+        });
+
+        // Accumulate open order value
+        orders.forEach(order => {
+            if (!order.SaleDate) {
+                openOrdersValue += order.FilledValue;
+            }
         });
 
         const numberOfWeeks = Object.keys(weeklyProfits).length;
