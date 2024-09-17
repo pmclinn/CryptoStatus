@@ -24,7 +24,7 @@ async function loadOrders() {
             if (order.SaleDate) {
                 order.SaleDate = new Date(order.SaleDate);
             }
-            order.GrossProfit = order.GrossProfit !== null ? parseFloat(order.GrossProfit) : null;
+            order.ProfitMinusFees = order.ProfitMinusFees !== null ? parseFloat(order.ProfitMinusFees) : null;
             order.FilledValue = parseFloat(order.FilledValue);
             order.PurchasePrice = parseFloat(order.PurchasePrice);
             order.ActualSalePrice = order.ActualSalePrice !== null ? parseFloat(order.ActualSalePrice) : null;
@@ -46,7 +46,7 @@ async function loadOrders() {
         }
 
         // Calculate top-level summaries
-        let totalGrossProfit = 0;
+        let totalProfitMinusFees = 0;
         let totalTransactions = orders.length;
         let totalFilledValue = 0;
         let openOrdersValue = 0;
@@ -57,7 +57,7 @@ async function loadOrders() {
         // Initialize variables for monthly summaries
         const monthlyTransactions = Array(12).fill(0);
         const monthlyFilledValue = Array(12).fill(0);
-        const monthlyGrossProfit = Array(12).fill(0);
+        const monthlyProfitMinusFees = Array(12).fill(0);
 
         orders.forEach(order => {
             const buyDate = order.BuyDate;
@@ -74,26 +74,26 @@ async function loadOrders() {
                 openOrdersValue += order.FilledValue;
             }
 
-            if (order.GrossProfit !== null) {
-                totalGrossProfit += order.GrossProfit;
+            if (order.ProfitMinusFees !== null) {
+                totalProfitMinusFees += order.ProfitMinusFees;
 
                 // Update monthly gross profit
-                monthlyGrossProfit[orderMonth] += order.GrossProfit;
+                monthlyProfitMinusFees[orderMonth] += order.ProfitMinusFees;
 
-                weeklyProfits[weekNumber] = (weeklyProfits[weekNumber] || 0) + order.GrossProfit;
+                weeklyProfits[weekNumber] = (weeklyProfits[weekNumber] || 0) + order.ProfitMinusFees;
             }
 
             weeklyTransactions[weekNumber] = (weeklyTransactions[weekNumber] || 0) + 1;
         });
 
         const numberOfWeeks = Object.keys(weeklyProfits).length;
-        const averageProfitPerWeek = numberOfWeeks > 0 ? totalGrossProfit / numberOfWeeks : 0;
+        const averageProfitPerWeek = numberOfWeeks > 0 ? totalProfitMinusFees / numberOfWeeks : 0;
         const averageTransactionsPerWeek = numberOfWeeks > 0 ? totalTransactions / numberOfWeeks : 0;
 
         // Calculate Gross Profit Percentage
-        let grossProfitPercentage = 0;
+        let ProfitMinusFeesPercentage = 0;
         if (totalFilledValue > 0) {
-            grossProfitPercentage = (totalGrossProfit / totalFilledValue) * 100;
+            ProfitMinusFeesPercentage = (totalProfitMinusFees / totalFilledValue) * 100;
         }
 
         // Display Profit Summary at the top
@@ -103,8 +103,8 @@ async function loadOrders() {
         profitSummaryContainer.innerHTML = `
             <h3>Profit Summary</h3>
             <p><strong>Total Filled Value:</strong> $${totalFilledValue.toFixed(decimalPlaces)}</p>
-            <p><strong>Total Gross Profit:</strong> $${totalGrossProfit.toFixed(decimalPlaces)}</p>
-            <p><strong>Gross Profit Percentage:</strong> ${grossProfitPercentage.toFixed(2)}%</p>
+            <p><strong>Total Gross Profit:</strong> $${totalProfitMinusFees.toFixed(decimalPlaces)}</p>
+            <p><strong>Gross Profit Percentage:</strong> ${ProfitMinusFeesPercentage.toFixed(2)}%</p>
             <hr>
         `;
 
@@ -137,7 +137,7 @@ async function loadOrders() {
                             <td>${month}</td>
                             <td>${monthlyTransactions[index]}</td>
                             <td>$${monthlyFilledValue[index].toFixed(decimalPlaces)}</td>
-                            <td>$${monthlyGrossProfit[index].toFixed(decimalPlaces)}</td>
+                            <td>$${monthlyProfitMinusFees[index].toFixed(decimalPlaces)}</td>
                         </tr>
                     `).join('')}
                 </tbody>
@@ -160,7 +160,7 @@ async function loadOrders() {
                 <p><strong>Actual Sale Price:</strong> ${order.ActualSalePrice !== null ? `$${order.ActualSalePrice.toFixed(decimalPlaces)}` : 'N/A'}</p>
                 <p><strong>Targeted Profit (%):</strong> ${order.TargetedProfitPerc !== null ? `${order.TargetedProfitPerc.toFixed(2)}%` : 'N/A'}</p>
                 <p><strong>Profit Flag:</strong> ${order.ProfitFlag}</p>
-                <p><strong>Gross Profit:</strong> ${order.GrossProfit !== null ? `$${order.GrossProfit.toFixed(decimalPlaces)}` : 'N/A'}</p>
+                <p><strong>Gross Profit:</strong> ${order.ProfitMinusFees !== null ? `$${order.ProfitMinusFees.toFixed(decimalPlaces)}` : 'N/A'}</p>
             `;
             ordersContainer.appendChild(orderElement);
         });
