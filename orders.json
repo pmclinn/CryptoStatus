@@ -14,14 +14,14 @@
   {
     "Id": 44,
     "BuyDate": "2024-09-24T00:00:00",
-    "SaleDate": null,
+    "SaleDate": "2024-09-26T00:00:00",
     "FilledValue": 19.8511,
-    "DaysBetweenCreateAndSale": null,
+    "DaysBetweenCreateAndSale": 2,
     "PurchasePrice": 62970.7300,
-    "ActualSalePrice": null,
+    "ActualSalePrice": 65048.7600,
     "TargetedProfitPerc": 3.2900,
-    "ProfitFlag": "",
-    "ProfitMinusFees": null
+    "ProfitFlag": "Made Money",
+    "ProfitMinusFees": 0.7427
   },
   {
     "Id": 43,
@@ -62,14 +62,14 @@
   {
     "Id": 40,
     "BuyDate": "2024-09-22T00:00:00",
-    "SaleDate": null,
+    "SaleDate": "2024-09-26T00:00:00",
     "FilledValue": 49.6278,
-    "DaysBetweenCreateAndSale": null,
+    "DaysBetweenCreateAndSale": 4,
     "PurchasePrice": 62648.7300,
-    "ActualSalePrice": null,
+    "ActualSalePrice": 65217.3200,
     "TargetedProfitPerc": 4.0900,
-    "ProfitFlag": "",
-    "ProfitMinusFees": null
+    "ProfitFlag": "Made Money",
+    "ProfitMinusFees": 1.3414
   },
   {
     "Id": 39,
