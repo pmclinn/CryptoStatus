@@ -168,18 +168,6 @@
     "ProfitMinusFees": 0.1589
   },
   {
-    "Id": 31,
-    "BuyDate": "2024-09-19T00:00:00",
-    "SaleDate": null,
-    "FilledValue": 49.4071,
-    "DaysBetweenCreateAndSale": null,
-    "PurchasePrice": 66126.8700,
-    "ActualSalePrice": null,
-    "TargetedProfitPerc": 5.8500,
-    "ProfitFlag": "",
-    "ProfitMinusFees": null
-  },
-  {
     "Id": 30,
     "BuyDate": "2024-09-16T00:00:00",
     "SaleDate": "2024-09-17T00:00:00",
