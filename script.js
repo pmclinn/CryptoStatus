@@ -69,6 +69,9 @@ async function loadOrders() {
             const orderMonth = buyDate.getMonth();
             const weekNumber = getWeekNumber(buyDate);
 
+            // Debugging output to verify month value
+            console.log(`Order ID: ${order.Id}, BuyDate: ${buyDate}, Month: ${orderMonth}`);
+
             // Update monthly transactions and filled values for closed sales
             monthlyTransactions[orderMonth]++;
             monthlyFilledValue[orderMonth] += order.FilledValue;
@@ -177,28 +180,3 @@ async function loadOrders() {
         console.error('An error occurred while loading orders:', error);
     }
 }
-
-// Helper function to get week number of the year
-function getWeekNumber(d) {
-    d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-    const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-    const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-    return `${d.getUTCFullYear()}-W${weekNo}`;
-}
-
-// Helper function to format dates as 'YYYY-MM-DD'
-function formatDate(date) {
-    if (!(date instanceof Date) || isNaN(date)) {
-        return 'Invalid Date';
-    }
-    const year = date.getFullYear();
-    const month = (`0${date.getMonth() + 1}`).slice(-2); // Months are zero-indexed
-    const day = (`0${date.getDate()}`).slice(-2);
-    return `${year}-${month}-${day}`;
-}
-
-// Reload data on window resize
-window.addEventListener('resize', loadOrders);
-
-// Initial load
-loadOrders();
