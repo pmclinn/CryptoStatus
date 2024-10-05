@@ -40,7 +40,7 @@ async function loadOrders() {
         // Update the last purchase date
         if (orders.length > 0) {
             const lastPurchaseDate = formatDate(mostRecentOrder.BuyDate);
-            lastPurchaseContainer.innerHTML = <strong>Date of Last Purchase:</strong> ${lastPurchaseDate};
+            lastPurchaseContainer.innerHTML = `<strong>Date of Last Purchase:</strong> ${lastPurchaseDate}`;
         }
 
         // Calculate top-level summaries
@@ -69,10 +69,15 @@ async function loadOrders() {
             const orderMonth = buyDate.getMonth();
             const weekNumber = getWeekNumber(buyDate);
 
+            // Update monthly transactions and filled values
             // Update monthly transactions and filled values for closed sales
             monthlyTransactions[orderMonth]++;
             monthlyFilledValue[orderMonth] += order.FilledValue;
 
+            totalFilledValue += order.FilledValue;
+            if (!order.SaleDate) {
+                openOrdersValue += order.FilledValue;
+            }
             totalFilledValueClosedSales += order.FilledValue; // Accumulate filled value for closed sales
 
             if (order.ProfitMinusFees !== null) {
@@ -94,7 +99,6 @@ async function loadOrders() {
                 openOrdersValue += order.FilledValue;
             }
         });
-
         const numberOfWeeks = Object.keys(weeklyProfits).length;
         const averageProfitPerWeek = numberOfWeeks > 0 ? totalNetProfitMinusFees / numberOfWeeks : 0;
         const averageTransactionsPerWeek = numberOfWeeks > 0 ? totalTransactions / numberOfWeeks : 0;
@@ -109,27 +113,27 @@ async function loadOrders() {
         const isMobile = window.innerWidth <= 600;
         const decimalPlaces = isMobile ? 1 : 4;
 
-        profitSummaryContainer.innerHTML = 
+        profitSummaryContainer.innerHTML = `
             <h3>Profit Summary</h3>
             <p><strong>Total Filled Value (Closed Sales):</strong> $${totalFilledValueClosedSales.toFixed(decimalPlaces)}</p>
             <p><strong>Total Net Profit:</strong> $${totalNetProfitMinusFees.toFixed(decimalPlaces)}</p>
             <p><strong>Net Profit Percentage:</strong> ${NetProfitPercentage.toFixed(2)}%</p>
             <hr>
-        ;
+        `;
 
         // Display Activity Summary (renamed from Summary Totals)
-        activitySummaryContainer.innerHTML = 
+        activitySummaryContainer.innerHTML = `
             <h3>Activity Summary</h3>
             <p><strong>Average Profit Per Week:</strong> $${averageProfitPerWeek.toFixed(2)}</p>
             <p><strong>Average Transactions Per Week:</strong> ${averageTransactionsPerWeek.toFixed(2)}</p>
             <p><strong>Open Orders Value:</strong> $${openOrdersValue.toFixed(2)}</p>
             <hr>
-        ;
+        `;
 
         // Monthly Summary Table
         const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-        let monthlySummaryTable = 
+        let monthlySummaryTable = `
             <h3>Monthly Summary</h3>
             <table>
                 <thead>
@@ -141,17 +145,17 @@ async function loadOrders() {
                     </tr>
                 </thead>
                 <tbody>
-                    ${months.map((month, index) => 
+                    ${months.map((month, index) => `
                         <tr>
                             <td>${month}</td>
                             <td>${monthlyTransactions[index]}</td>
                             <td>$${monthlyFilledValue[index].toFixed(decimalPlaces)}</td>
                             <td>$${monthlyProfitMinusFees[index].toFixed(decimalPlaces)}</td>
                         </tr>
-                    ).join('')}
+                    `).join('')}
                 </tbody>
             </table>
-        ;
+        `;
         monthlySummaryContainer.innerHTML = monthlySummaryTable;
 
         // Transactions Details
@@ -159,18 +163,18 @@ async function loadOrders() {
             const orderElement = document.createElement('div');
             orderElement.classList.add('order');
 
-            orderElement.innerHTML = 
+            orderElement.innerHTML = `
                 <p><strong>Order ID:</strong> ${order.Id}</p>
                 <p><strong>Buy Date:</strong> ${formatDate(order.BuyDate)}</p>
                 <p><strong>Sale Date:</strong> ${order.SaleDate ? formatDate(order.SaleDate) : 'Open'}</p>
                 <p><strong>Filled Value:</strong> $${order.FilledValue.toFixed(decimalPlaces)}</p>
                 <p><strong>Days Between Buy and Sale:</strong> ${order.DaysBetweenCreateAndSale !== null ? order.DaysBetweenCreateAndSale : 'N/A'}</p>
                 <p><strong>Purchase Price:</strong> $${order.PurchasePrice.toFixed(decimalPlaces)}</p>
-                <p><strong>Actual Sale Price:</strong> ${order.ActualSalePrice !== null ? $${order.ActualSalePrice.toFixed(decimalPlaces)} : 'N/A'}</p>
-                <p><strong>Targeted Profit (%):</strong> ${order.TargetedProfitPerc !== null ? ${order.TargetedProfitPerc.toFixed(2)}% : 'N/A'}</p>
+                <p><strong>Actual Sale Price:</strong> ${order.ActualSalePrice !== null ? `$${order.ActualSalePrice.toFixed(decimalPlaces)}` : 'N/A'}</p>
+                <p><strong>Targeted Profit (%):</strong> ${order.TargetedProfitPerc !== null ? `${order.TargetedProfitPerc.toFixed(2)}%` : 'N/A'}</p>
                 <p><strong>Profit Flag:</strong> ${order.ProfitFlag}</p>
-                <p><strong>Net Profit:</strong> ${order.ProfitMinusFees !== null ? $${order.ProfitMinusFees.toFixed(decimalPlaces)} : 'N/A'}</p>
-            ;
+                <p><strong>Net Profit:</strong> ${order.ProfitMinusFees !== null ? `$${order.ProfitMinusFees.toFixed(decimalPlaces)}` : 'N/A'}</p>
+            `;
             ordersContainer.appendChild(orderElement);
         });
     } catch (error) {
@@ -183,7 +187,7 @@ function getWeekNumber(d) {
     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
     const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
     const weekNo = Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
-    return ${d.getUTCFullYear()}-W${weekNo};
+    return `${d.getUTCFullYear()}-W${weekNo}`;
 }
 
 // Helper function to format dates as 'YYYY-MM-DD'
@@ -192,9 +196,9 @@ function formatDate(date) {
         return 'Invalid Date';
     }
     const year = date.getFullYear();
-    const month = (0${date.getMonth() + 1}).slice(-2); // Months are zero-indexed
-    const day = (0${date.getDate()}).slice(-2);
-    return ${year}-${month}-${day};
+    const month = (`0${date.getMonth() + 1}`).slice(-2); // Months are zero-indexed
+    const day = (`0${date.getDate()}`).slice(-2);
+    return `${year}-${month}-${day}`;
 }
 
 // Reload data on window resize
