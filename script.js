@@ -1,13 +1,23 @@
 async function loadOrders() {
     try {
+        console.log("Loading orders...");
         const response = await fetch('orders.json');
+        if (!response.ok) {
+            throw new Error(`Failed to fetch orders.json: ${response.statusText}`);
+        }
         const orders = await response.json();
+
+        console.log("Orders fetched successfully:", orders);
 
         const ordersContainer = document.getElementById('orders');
         const profitSummaryContainer = document.getElementById('profit-summary');
         const monthlySummaryContainer = document.getElementById('monthly-summary');
         const lastPurchaseContainer = document.getElementById('last-purchase');
         const activitySummaryContainer = document.getElementById('activity-summary');
+
+        if (!ordersContainer || !profitSummaryContainer || !monthlySummaryContainer || !lastPurchaseContainer || !activitySummaryContainer) {
+            throw new Error("One or more HTML elements not found!");
+        }
 
         ordersContainer.innerHTML = '';
         profitSummaryContainer.innerHTML = '';
@@ -28,6 +38,9 @@ async function loadOrders() {
             order.ActualSalePrice = order.ActualSalePrice !== null ? parseFloat(order.ActualSalePrice) : null;
             order.TargetedProfitPerc = parseFloat(order.TargetedProfitPerc);
         });
+
+        // Check that orders are correctly parsed
+        console.log("Parsed orders:", orders);
 
         // Sort orders by Id in descending order
         orders.sort((a, b) => b.Id - a.Id);
@@ -91,6 +104,8 @@ async function loadOrders() {
             weeklyTransactions[weekNumber] = (weeklyTransactions[weekNumber] || 0) + 1;
         });
 
+        console.log("Monthly summaries:", { monthlyTransactions, monthlyFilledValue, monthlyProfitMinusFees });
+
         // Accumulate open order value
         orders.forEach(order => {
             if (!order.SaleDate) {
@@ -108,7 +123,9 @@ async function loadOrders() {
             NetProfitPercentage = (totalNetProfitMinusFees / totalFilledValueClosedSales) * 100;
         }
 
-        // Display Profit Summary at the top (changed to Net Profit)
+        console.log("Top-level summaries calculated.");
+
+        // Display summaries
         const isMobile = window.innerWidth <= 600;
         const decimalPlaces = isMobile ? 1 : 4;
 
@@ -120,7 +137,6 @@ async function loadOrders() {
             <hr>
         `;
 
-        // Display Activity Summary (renamed from Summary Totals)
         activitySummaryContainer.innerHTML = `
             <h3>Activity Summary</h3>
             <p><strong>Average Profit Per Week:</strong> $${averageProfitPerWeek.toFixed(2)}</p>
@@ -157,26 +173,8 @@ async function loadOrders() {
         `;
         monthlySummaryContainer.innerHTML = monthlySummaryTable;
 
-        // Transactions Details
-        orders.forEach(order => {
-            const orderElement = document.createElement('div');
-            orderElement.classList.add('order');
-
-            orderElement.innerHTML = `
-                <p><strong>Order ID:</strong> ${order.Id}</p>
-                <p><strong>Buy Date:</strong> ${formatDate(order.BuyDate)}</p>
-                <p><strong>Sale Date:</strong> ${order.SaleDate ? formatDate(order.SaleDate) : 'Open'}</p>
-                <p><strong>Filled Value:</strong> $${order.FilledValue.toFixed(decimalPlaces)}</p>
-                <p><strong>Days Between Buy and Sale:</strong> ${order.DaysBetweenCreateAndSale !== null ? order.DaysBetweenCreateAndSale : 'N/A'}</p>
-                <p><strong>Purchase Price:</strong> $${order.PurchasePrice.toFixed(decimalPlaces)}</p>
-                <p><strong>Actual Sale Price:</strong> ${order.ActualSalePrice !== null ? `$${order.ActualSalePrice.toFixed(decimalPlaces)}` : 'N/A'}</p>
-                <p><strong>Targeted Profit (%):</strong> ${order.TargetedProfitPerc !== null ? `${order.TargetedProfitPerc.toFixed(2)}%` : 'N/A'}</p>
-                <p><strong>Profit Flag:</strong> ${order.ProfitFlag}</p>
-                <p><strong>Net Profit:</strong> ${order.ProfitMinusFees !== null ? `$${order.ProfitMinusFees.toFixed(decimalPlaces)}` : 'N/A'}</p>
-            `;
-            ordersContainer.appendChild(orderElement);
-        });
     } catch (error) {
         console.error('An error occurred while loading orders:', error);
+        alert('An error occurred while loading data. Check the console for more details.');
     }
 }
