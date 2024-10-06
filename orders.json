@@ -1,5 +1,17 @@
 [
   {
+    "Id": 58,
+    "BuyDate": "2024-10-06T00:00:00",
+    "SaleDate": null,
+    "FilledValue": 138.9578,
+    "DaysBetweenCreateAndSale": null,
+    "PurchasePrice": 61932.7400,
+    "ActualSalePrice": null,
+    "TargetedProfitPerc": 3.4900,
+    "ProfitFlag": "",
+    "ProfitMinusFees": null
+  },
+  {
     "Id": 57,
     "BuyDate": "2024-10-05T00:00:00",
     "SaleDate": null,
