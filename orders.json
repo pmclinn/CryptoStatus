@@ -14,14 +14,14 @@
   {
     "Id": 95,
     "BuyDate": "2024-10-23T00:00:00",
-    "SaleDate": null,
+    "SaleDate": "2024-10-24T00:00:00",
     "FilledValue": 139.4422,
-    "DaysBetweenCreateAndSale": null,
+    "DaysBetweenCreateAndSale": 1,
     "PurchasePrice": 66314.7100,
-    "ActualSalePrice": null,
+    "ActualSalePrice": 68635.7200,
     "TargetedProfitPerc": 3.4900,
-    "ProfitFlag": "",
-    "ProfitMinusFees": null
+    "ProfitFlag": "Made Money",
+    "ProfitMinusFees": 3.7747
   },
   {
     "Id": 94,
